@@ -2,7 +2,7 @@ class PartyFoul::IssueRenderers::Rack < PartyFoul::IssueRenderers::Base
   # Title for the issue comprised of (exception) "message"
   #
   # @return [String]
-  def title
+  def original_title
     %{(#{exception.class}) "#{exception.message}"}
   end
 

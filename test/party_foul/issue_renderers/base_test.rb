@@ -104,4 +104,12 @@ Fingerprint: `abcdefg1234567890`
       rendered_issue.occurred_at.must_equal expected
     end
   end
+
+  describe '#title' do
+    it 'masks the object ids in the original title' do
+      rendered_issue = PartyFoul::IssueRenderers::Base.new(nil, nil)
+      rendered_issue.stubs(:original_title).returns('Error for #<ClassName:0xabcdefg1234567>')
+      rendered_issue.title.must_equal 'Error for #<ClassName:0xXXXXXX>'
+    end
+  end
 end
