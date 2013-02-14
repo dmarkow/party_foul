@@ -14,8 +14,15 @@ class PartyFoul::IssueRenderers::Base
   # Derived title of the issue. Must be implemented by the adapter class
   #
   # @return [NotImplementedError]
-  def title
+  def original_title
     raise NotImplementedError
+  end
+
+  # Title of the issue with any object ids masked
+  #
+  # @return [String]
+  def title
+    original_title.gsub(/#<(\w+):0x\w+?>/, "#<\\1:0xXXXXXX>")
   end
 
   # Renders the issue body

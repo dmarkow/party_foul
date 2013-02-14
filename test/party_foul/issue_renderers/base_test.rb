@@ -95,4 +95,12 @@ Fingerprint: `abcdefg1234567890`
       rendered_issue.fingerprint.must_equal Digest::SHA1.hexdigest(rendered_issue.title)
     end
   end
+
+  describe '#title' do
+    it 'masks the object ids in the original title' do
+      rendered_issue = PartyFoul::IssueRenderers::Base.new(nil, nil)
+      rendered_issue.stubs(:original_title).returns('Error for #<ClassName:0xabcdefg1234567>')
+      rendered_issue.title.must_equal 'Error for #<ClassName:0xXXXXXX>'
+    end
+  end
 end
