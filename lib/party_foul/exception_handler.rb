@@ -70,6 +70,7 @@ class PartyFoul::ExceptionHandler
   private
 
   def self.clean_env(env)
+    env['rack.session'] = env['rack.session'].nil? ? nil : env['rack.session'].to_hash
     env.select { |key, value| Marshal.dump(value) rescue false }
   end
 
